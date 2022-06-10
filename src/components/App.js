@@ -1,34 +1,16 @@
 import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import Main from "./Main";
 
 function App() {
     return (
         <>
     <div className="page__content">
-      <header className="header">
-        <img className="header__logo" src="<%=require('./image/header/logo.svg')%>" alt="логотип" />
-      </header>
-
-      <main>
-        <section className="profile">
-          <button type="button" className="profile__edit-avatar">
-            <img className="profile__avatar" src="#" alt="Загружаю ..."/>
-          </button>
-          <div className="profile__info">
-            <h1 className="profile__nick-name">Загружаю ...</h1>
-            <button type="button" className="profile__edit">
-            </button>
-            <p className="profile__profession">Загружаю ...</p>
-          </div>
-          <button type="button" className="profile__add-photo"></button>
-        </section>
-        <section className="photo-grid" id="card-list"></section>
-      </main>
-
-      <footer className="footer">
-        <p className="footer__copyright">&copy; 2020 Mesto Russia</p>
-      </footer>
+        <Header />
+        <Main />
+        <Footer />
     </div>
-
     <div className="popup" id="avatar">
       <div className="popup__body">
         <form
@@ -159,33 +141,9 @@ function App() {
         </form>
       </div>
     </div>
-    <div className="popup popup_type_max-img" id="max-img">
-      <div className="popup__body">
-        <div className="popup__content-max-img popup-content">
-          <img className="popup__max-img" src="#" alt="#" />
-          <h2 className="popup__max-img-title">Архыз</h2>
-          <button
-            type="button"
-            className="popup__close-button"
-          ></button>
-        </div>
-      </div>
-    </div>
-    <template id="template-сard">
-      <div className="card">
-        <img className="card__image" src="#" alt="#" />
-        <div className="card__title-wrap">
-          <h2 className="card__title">#</h2>
-          <div className="card__like-box">
-          <button type="button" className="card__like-button"></button>
-          <span className="card__like-counter"></span>
-          </div>
-        </div>
-        <button type="button" className="card__delete-button"></button>
-      </div>
-    </template>
+
         </>
-    )
-}
+    );
+};
 
 export default App; 

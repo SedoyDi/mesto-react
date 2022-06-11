@@ -1,15 +1,20 @@
 import React from "react";
 
-function ImagePopup() {
+function ImagePopup(props) {
+  const className = props.dataCard ?
+  `popup popup_type_${props.name} popup_opened`:
+  `popup popup_type_${props.name}`;
+
     return (
-        <div className="popup popup_type_max-img" id="max-img">
-        <div className="popup__body">
+        <div className={className} id="max-img">
+        <div className="popup__body" onClick={props.onClose}>
           <div className="popup__content-max-img popup-content">
-            <img className="popup__max-img" src="#" alt="#" />
-            <h2 className="popup__max-img-title">Архыз</h2>
+            <img className="popup__max-img" src={props.dataCard && props.dataCard.link} alt={props.dataCard && props.dataCard.name} />
+            <h2 className="popup__max-img-title">{props.dataCard && props.dataCard.name}</h2>
             <button
               type="button"
               className="popup__close-button"
+              onClick={props.onClose}
             ></button>
           </div>
         </div>

@@ -10,20 +10,17 @@ class Api {
       return Promise.reject("Извините произошла ошибка");
     }
   }
-  _getUserData() {
+  getUserData() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: this._headers,
     }).then(this._checkResponse);
   }
-  _getAllCard() {
+  getAllCard() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
       headers: this._headers,
     }).then(this._checkResponse);
-  }
-  getAllData() {
-    return Promise.all([this._getAllCard(), this._getUserData()]);
   }
 }
 

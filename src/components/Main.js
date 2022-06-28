@@ -1,36 +1,22 @@
 import React from "react";
 import Card from "./Card";
 import api from "../utils/api";
+import {CurrentUserContext} from "../contexts/CurrentUserContext.js";
 
 function Main(props) {
-  const [userName, setUserName] = React.useState("Жак Ив Кусто");
-  const [userDescription, setUserDescription] = React.useState(
-    "Иследователь океана"
-  );
-  const [userAvatar, setUserAvatar] = React.useState(
-    "https://funart.pro/uploads/posts/2021-07/1627507475_8-funart-pro-p-zayats-korol-zhivotnie-krasivo-foto-10.jpg"
-  );
   const [cards, setCards] = React.useState([]);
-  const userInfo = {
-    name: userName,
-    about: userDescription,
-    avatar: userAvatar,
-  };
-
+  const userInfo = React.useContext(CurrentUserContext);
   React.useEffect(() => {
     api
-      .getAllData()
+      .getAllCard()
       .then((res) => {
-        const [dataCard, dataUser] = res;
-        setUserName(dataUser.name);
-        setUserDescription(dataUser.about);
-        setUserAvatar(dataUser.avatar);
-        setCards(dataCard);
+        setCards(res);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
   return (
     <main>
       <section className="profile">

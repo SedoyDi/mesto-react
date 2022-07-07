@@ -1,21 +1,27 @@
 import React from "react";
 
 function ImagePopup(props) {
-  const className = props.dataCard
+  const className = props.card
     ? `popup popup_type_${props.name} popup_opened`
     : `popup popup_type_${props.name}`;
 
+  function handleOverlayClick(evt) {
+    if (evt.target === evt.currentTarget) {
+      props.onClose();
+    }
+  }
+
   return (
     <div className={className} id="max-img">
-      <div className="popup__body">
+      <div className="popup__body" onClick={handleOverlayClick}>
         <div className="popup__content-max-img popup-content">
           <img
             className="popup__max-img"
-            src={props.dataCard && props.dataCard.link}
-            alt={props.dataCard && props.dataCard.name}
+            src={props.card && props.card.link}
+            alt={props.card && props.card.name}
           />
           <h2 className="popup__max-img-title">
-            {props.dataCard && props.dataCard.name}
+            {props.card && props.card.name}
           </h2>
           <button
             type="button"

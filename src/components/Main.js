@@ -1,22 +1,18 @@
-import React from "react";
-import Card from "./Card";
-import api from "../utils/api";
-import {CurrentUserContext} from "../contexts/CurrentUserContext.js";
+import React from 'react';
+import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
-  const [cards, setCards] = React.useState([]);
-  const userInfo = React.useContext(CurrentUserContext);
-  React.useEffect(() => {
-    api
-      .getAllCard()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const currentUser = React.useContext(CurrentUserContext);
+  
+  function handleCardLike(card) {
+    props.onCardLike(card);
+  }
 
+  function handleCardDelete(card) {
+    props.onCardDelete(card);
+  }
+  
   return (
     <main>
       <section className="profile">
@@ -25,16 +21,20 @@ function Main(props) {
           className="profile__edit-avatar"
           onClick={props.onEditAvatar}
         >
-          <img className="profile__avatar" src={userInfo.avatar} alt="Аватар" />
+          <img
+            className="profile__avatar"
+            src={currentUser.avatar}
+            alt="Аватар"
+          />
         </button>
         <div className="profile__info">
-          <h1 className="profile__nick-name">{userInfo.name}</h1>
+          <h1 className="profile__nick-name">{currentUser.name}</h1>
           <button
             type="button"
             className="profile__edit"
             onClick={props.onEditProfile}
           ></button>
-          <p className="profile__profession">{userInfo.about}</p>
+          <p className="profile__profession">{currentUser.about}</p>
         </div>
         <button
           type="button"
@@ -43,12 +43,13 @@ function Main(props) {
         ></button>
       </section>
       <section className="photo-grid" id="card-list">
-        {cards.map((dataCard) => (
+        {props.cards.map((card) => (
           <Card
-            key={dataCard._id}
-            dataCard={dataCard}
+            key={card._id}
+            card={card}
             onCardClick={props.onCardClick}
-            onDeleteCard={props.onDeleteCard}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
         ))}
       </section>

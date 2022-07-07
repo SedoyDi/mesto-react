@@ -120,8 +120,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <div className="page__content">
+      <div className="page__content">
           <Header />
           <Main
             onEditAvatar={handleEditAvatarClick}
@@ -149,7 +148,6 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
           />
           <Footer />
-        </div>
       </div>
     </CurrentUserContext.Provider>
   );
